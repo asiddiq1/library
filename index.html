@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="header">
+            <h2 class="title">LitWorld</h2>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">myBooks</a></li>
+                <li><a href="">Browse</a></li>
+                <li><a href="">Community</a></li>
+            </ul>
+        </div>
+        <button class="login">Login</button>
+    </nav>
+    <div class="content">
+    <div class="book-insertion">
+        <button id="add-book" class="add-book">+ Add Book</button>
+    </div>
+
+    
+        <div class="form-popup" id="myForm">
+            <form action="" class="form-container" id="form-container">
+              <div class="form-inputs">
+                  <h3>Add Book</h3>
+                  <input id="input-title" type="text" placeholder="Title" name="title" required>
+                  <input id="input-author" type="text" placeholder="Author" name="author" required>
+                  <input id="input-pages" type="number" placeholder="Pages" name="pages" required>
+                  <label for="is_read">Have you read it?
+                  <input type="checkbox" id="is_read" name="is_read">
+                  </label>
+                  <button type="submit" class="btn">Submit</button>
+              </div>
+            </form>
+        </div>
+        <div class="book-container">
+            <div class="mybooks" id="myBooks">
+                <!-- <div class="book">
+                    <div class="title">Harry Potter</div>
+                    <div class="author">J.K Rowling</div>
+                    <div class="pages">460 pages</div>
+                    <button class="is_read_btn"></button>
+                    <button class="delete-book">Delete</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
