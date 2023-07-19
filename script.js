@@ -1,23 +1,39 @@
+class MyLibrary{
+    constructor(){
+        this.library = [];
+    }
+    addBook(book){
+        this.library.push(book);
+
+    }
+    delBook(index){
+        this.library.splice(index, 1);
+    }
+    getBook(index){
+        return this.library[index];
+
+    }
+    updateBook(index, book){
+        this.library[index] = book;
+
+    }
+}
+
+class Book{
+    constructor (title, author, pages, read){
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.read = read  
+    }
+}
+
+let myLibrary = new MyLibrary();
 
 const modal = document.querySelector(".form-popup");
 const trigger = document.querySelector(".add-book");
-
 const book_container = document.getElementById("myBooks");
-
-let bookForm = document.getElementById("form-container");
-
-let myLibrary = [];
-
-function Book(title, author, pages, read){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    this.info = function(){
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read} read yet`;
-    }
-
-}
+const bookForm = document.getElementById("form-container");
 
 bookForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -29,7 +45,7 @@ bookForm.addEventListener("submit", (e) => {
 
     let book = new Book(title.value, author.value, pages.value, is_read.checked);
 
-    myLibrary.push(book);
+    myLibrary.addBook(book);
     addBookToLibrary(book);
 
     title.value = "";
@@ -44,10 +60,10 @@ bookForm.addEventListener("submit", (e) => {
 
 function addBookToLibrary(myBook){
 
-
     let book = document.createElement('div');
     book.className = 'book'
     book.id = 'book-' + book_container.childElementCount;
+    book["data-index"] = book_container.childElementCount;
 
     let title = document.createElement('div');
     title.className = 'title';
@@ -95,25 +111,31 @@ function toggleModal(event){
     }
 }
 
-
 document.body.addEventListener("click", toggleModal);
 
-
 function delBook(event){
-    let delBookId = event.target.id; 
-    let childToRemove = document.getElementById("book-" + delBookId.slice(-1));
-    book_container.removeChild(childToRemove);
+    let delBookId = event.target.parentNode;
+    let index = delBookId["data-index"];
+    myLibrary.delBook(index);
+    book_container.removeChild(delBookId);
 }
 
 function toggleRead(event){
     let readStatus = event.target; 
+    let index = readStatus.parentNode["data-index"];
+    let book = myLibrary.getBook(index);
+
+
     if (readStatus.className == "is_read_btn"){
         readStatus.classList.remove("is_read_btn");
         readStatus.classList.add("is_not_read_btn");
+        book.read = false;
     }
     else{
         readStatus.classList.remove("is_not_read_btn");
         readStatus.classList.add("is_read_btn");
+        book.read = true;
     }
+    myLibrary.updateBook(index, book);
 
 }
